@@ -6,7 +6,7 @@ const Loader = () => {
   return (
     <div className={style.loaderContainer}>
       <MagnifyingGlass
-        visible={visible}
+        visible={true}
         height="150"
         width="150"
         ariaLabel="magnifying-glass-loading"
@@ -17,6 +17,6 @@ const Loader = () => {
       />
     </div>
   );
-}
+};
 
-export default Loader;
+export default Loader
