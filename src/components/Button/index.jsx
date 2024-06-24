@@ -1,15 +1,21 @@
-import { Component } from "react";
-import styles from "./Button.module.scss"
+import React from "react";
+import styles from "./Button.module.scss";
+import PropTypes from "prop-types";
 
-export default class Button extends Component {
-  render() {
-    const { onClick, disabled } = this.props;
-    return (
-      <button
-        type="button"
-        className={styles.button}
-        onClick={onClick}
-        disabled={disabled}>Load more...</button>
-    );
-  }
-}
+const Button = ({ onClick, disabled }) => {
+  return (
+    <button
+      type="button"
+      className={styles.button}
+      onClick={onClick}
+      disabled={disabled}>
+      Load more...
+    </button>
+  );
+};
+Button.propTypes = {
+  onClick: PropTypes.func,
+  disabled: PropTypes.bool,
+};
+
+export default Button;
