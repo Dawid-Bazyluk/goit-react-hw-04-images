@@ -1,29 +1,34 @@
-import { Component } from "react";
+import { useEffect } from "react";
+import PropTypes from "prop-types";
 import styles from "./Modal.module.scss";
 
-export default class Modal extends Component {
-  handleKeyDown = (evt) => {
+const Modal = ({ src, alt, onClose }) => {
+  const handleKeyDown = (evt) => {
     if (evt.keyCode === 27) {
-      this.props.onClose();
+      onClose();
     }
   };
-  componentDidMount() {
-    document.addEventListener("keydown", this.handleKeyDown);
-  }
 
-  componentWillUnmount() {
-    document.removeEventListener("keydown", this.handleKeyDown);
-  }
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
-  render() {
-    const { src, alt, onClose } = this.props;
-
-    return (
-      <div className={styles.overlay} onClick={onClose}>
-        <div className={styles.modal}>
-          <img src={src} alt={alt} />
-        </div>
+  return (
+    <div className={styles.overlay} onClick={onClose}>
+      <div className={styles.modal}>
+        <img src={src} alt={alt} />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+Modal.propTypes = {
+  src: PropTypes.string,
+  alt: PropTypes.string,
+  onClick: PropTypes.func,
+};
+
+export default Modal;
